@@ -157,6 +157,8 @@ namespace Prog
                         double tariffStart = Convert.ToDouble(tariffRow["Начало периода"]);
                         DateTime dateStart_Period = tariffStart > 0 ?
                             dateStart.Date.AddDays(--tariffStart) : dateStart;
+                        if (dateStart_Period < dateFrom)
+                            dateStart_Period = dateFrom;
 
                         DateTime dateEnd_Period = tariffRow["Окончание периода"] is DBNull ?
                             dateTo : dateStart.Date.AddDays(Convert.ToDouble(tariffRow["Окончание периода"])).AddSeconds(-1);
